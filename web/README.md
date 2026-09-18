@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Turf 2 / TurfBook Pro — Multi-Tenant Sports Turf Booking Engine V1
+
+Production deployment on Vercel with Next.js 16 (App Router) and Supabase.
 
 ## Getting Started
 
