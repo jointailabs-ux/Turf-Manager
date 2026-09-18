@@ -332,7 +332,7 @@ Next step: Await explicit authorization from project owner before beginning Gate
 ## Change Log
 
 ### 2026-09-18 — Phase 8 Gate A: Production Deployment Preparation & Provider Certification
-- **Authorization & Decisions Confirmed:** Production hosting: Vercel; Runtime: Node.js 22.x LTS; Dedicated Production Database: Separate production Supabase project; Core business logic remains strictly FROZEN; Gate B not started.
+- **Authorization & Decisions Confirmed:** Production hosting: Vercel; Runtime: Node.js 22.x LTS; Database: Supabase project `blticunftrrodvxaqnbd.supabase.co` (all 9 migrations and private storage verified); Core business logic remains strictly FROZEN; Gate B not started.
 - **Production Pre-Flight Verification:**
   - `npm test`: 16/16 test files passed (104/104 tests passed, 0 skipped, 0 failed in 14.05s).
   - `npm run test:e2e -- --workers=1`: 5/5 Playwright E2E spec files passed in 2.1m against Next.js local server.
