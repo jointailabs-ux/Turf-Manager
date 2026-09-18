@@ -1,0 +1,13 @@
+{
+  "staffEmail": "staff_1789701743018@e2e.test",
+  "staffPassword": "password123",
+  "customerAEmail": "customerA_1789701743018@e2e.test",
+  "customerAPassword": "password123",
+  "customerBEmail": "customerB_1789701743018@e2e.test",
+  "customerBPassword": "password123",
+  "companyId": "10edfcc3-853c-4b52-956b-7ef791dfde2d",
+  "venueId": "d9321c29-4a24-4f45-be9f-cc829a41e238",
+  "venueSlug": "e2e-venue-1789701743018",
+  "fieldId": "7269707c-cfdf-4236-806c-bf6eb8d698da",
+  "paymentAccountId": "6bf347a8-e93f-480e-82f5-46e0bf4e78c5"
+}
