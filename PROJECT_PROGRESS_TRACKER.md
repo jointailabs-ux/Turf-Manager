@@ -331,6 +331,28 @@ Next step: Await explicit authorization from project owner before beginning Gate
 
 ## Change Log
 
+### 2026-09-19 — Phase 8 Gate A: Vercel Production Deployment & 404 Investigation
+- **GitHub Repository Synchronization:** Initialized root repository and linked remote origin `https://github.com/jointailabs-ux/Turf-Manager.git` on branch `main`. Configured root `.gitignore` to prevent credential leakages (`.env`, `.env.test`, `.next/`, `node_modules/`).
+- **Production Pre-Flight Verification:**
+  - `npm test`: 16/16 test files passed (104/104 tests passed, 0 skipped, 0 failed in 19.28s).
+  - `npm run test:e2e -- --workers=1`: 5/5 Playwright E2E spec files passed in 2.1m against Next.js server.
+  - `npm run typecheck`: PASS (Exit 0, 0 errors).
+  - `npm run lint`: PASS (Exit 0, 0 errors, 4 non-blocking warnings).
+  - `npm run build`: PASS (Exit 0, Turbopack compiled all 26 routes, TypeScript passed in 11.3s, static generation passed in 2.6s).
+- **Vercel Deployment & 404 Investigation:**
+  - **Application Root:** Confirmed Next.js application root is `/web` with `web/package.json`, `web/next.config.ts`, `web/src/app/page.tsx` (Route `/`), and `web/supabase/combined_migrations.sql`.
+  - **Vercel Root Directory:** Identified that Vercel was initially targeting repository root `./`, causing 404; successfully corrected to `web`.
+  - **Node.js Runtime:** Verified Node.js 22.x LTS enforcement on Vercel via `"engines": { "node": "22.x" }` in `web/package.json`.
+  - **Vercel Build Verification:** Confirmed Next.js 16.3.4 (Turbopack) successfully compiled and deployed all 26 routes in 24 seconds (`Build Completed in /vercel/output`).
+  - **Static Asset Serving:** Confirmed live Vercel deployment serves static assets (`GET https://turf-manager-rho.vercel.app/vercel.svg` -> `HTTP 200 OK`).
+  - **Environment Variables:** All 4 production environment variables configured on Vercel: `NEXT_PUBLIC_SUPABASE_URL` (Config), `NEXT_PUBLIC_SUPABASE_ANON_KEY` (Config), `SUPABASE_SERVICE_ROLE_KEY` (Secret), and `CRON_SECRET` (Secret).
+  - **404 Root Causes Identified:**
+    1. Pending domain configuration save on `turf-manager-rho.vercel.app` in Vercel Domains dashboard.
+    2. Vercel "Standard Deployment Protection" (Vercel SSO login wall) active on the project, intercepting unauthenticated public traffic (returning 302 redirect on team domain and 404 on unlinked alias).
+    3. Middleware Supabase initialization requires environment variables to propagate in active deployment.
+- **Database Status:** Production database established on existing certified Supabase project `blticunftrrodvxaqnbd.supabase.co` with all 9 migrations, composite performance indexes, RLS, and private storage buckets (`payment_proofs`, `venue_assets`).
+- **Gate A Status:** READY WITH EXTERNAL CONFIGURATION REQUIRED (Awaiting final domain save and Deployment Protection toggle in Vercel dashboard).
+
 ### 2026-09-18 — Phase 8 Gate A: Production Deployment Preparation & Provider Certification
 - **Authorization & Decisions Confirmed:** Production hosting: Vercel; Runtime: Node.js 22.x LTS; Database: Supabase project `blticunftrrodvxaqnbd.supabase.co` (all 9 migrations and private storage verified); Core business logic remains strictly FROZEN; Gate B not started.
 - **Production Pre-Flight Verification:**
